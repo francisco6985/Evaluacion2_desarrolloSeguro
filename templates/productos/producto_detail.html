@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<div class="mx-auto max-w-3xl">
+
+    <div class="rounded-2xl bg-white p-8 shadow">
+
+        <div class="mb-8 flex items-start justify-between">
+
+            <div>
+
+                <p class="text-sm font-medium uppercase tracking-wide text-blue-600">
+                    Producto
+                </p>
+
+                <h1 class="mt-1 text-3xl font-bold text-slate-900">
+                    {{ producto.nombre }}
+                </h1>
+
+            </div>
+
+            <span class="rounded-full bg-green-100 px-4 py-2 text-sm font-semibold text-green-700">
+
+                Stock:
+                {{ producto.stock }}
+
+            </span>
+
+        </div>
+
+
+        <div class="space-y-6">
+
+            <div>
+
+                <p class="text-sm font-semibold text-slate-500">
+                    Descripción
+                </p>
+
+                <p class="mt-1 text-slate-800">
+                    {{ producto.descripcion|default:"Sin descripción" }}
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <p class="text-sm font-semibold text-slate-500">
+                    Precio
+                </p>
+
+                <p class="mt-1 text-2xl font-bold text-slate-900">
+                    ${{ producto.precio }}
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="mt-10 flex justify-end gap-3">
+
+            <a
+                href="{% url 'producto-list' %}"
+                class="rounded-lg border border-slate-300 px-5 py-2.5 font-medium text-slate-700 hover:bg-slate-50"
+            >
+                Volver
+            </a>
+
+            <a
+                href="{% url 'producto-update' producto.pk %}"
+                class="rounded-lg bg-amber-500 px-5 py-2.5 font-semibold text-white hover:bg-amber-600"
+            >
+                Editar
+            </a>
+
+            <a
+                href="{% url 'producto-delete' producto.pk %}"
+                class="rounded-lg bg-red-600 px-5 py-2.5 font-semibold text-white hover:bg-red-700"
+            >
+                Eliminar
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+<div class="mx-auto max-w-2xl">
+
+    <div class="rounded-2xl bg-white p-8 shadow">
+
+        {% if object %}
+
+            <h1 class="text-3xl font-bold text-slate-900">
+                Editar producto
+            </h1>
+
+            <p class="mt-2 text-slate-500">
+                Modifica los datos del producto.
+            </p>
+
+        {% else %}
+
+            <h1 class="text-3xl font-bold text-slate-900">
+                Crear producto
+            </h1>
+
+            <p class="mt-2 text-slate-500">
+                Ingresa la información del nuevo producto.
+            </p>
+
+        {% endif %}
+
+
+        <form
+            method="post"
+            class="mt-8"
+        >
+
+            {% csrf_token %}
+
+            {{ form|crispy }}
+
+
+            <div class="mt-6 flex justify-end gap-3">
+
+                <a
+                    href="{% url 'producto-list' %}"
+                    class="rounded-lg border border-slate-300 px-5 py-2.5 font-medium text-slate-700 hover:bg-slate-50"
+                >
+                    Cancelar
+                </a>
+
+                <button
+                    type="submit"
+                    class="rounded-lg bg-blue-600 px-5 py-2.5 font-semibold text-white hover:bg-blue-700"
+                >
+                    Guardar
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

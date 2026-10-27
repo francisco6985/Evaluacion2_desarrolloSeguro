@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+    Productos
+{% endblock %}
+
+
+{% block content %}
+
+<div class="mb-8 flex items-center justify-between">
+
+    <div>
+
+        <h1 class="text-3xl font-bold text-slate-900">
+            Productos
+        </h1>
+
+        <p class="mt-1 text-slate-500">
+            Administración de productos registrados.
+        </p>
+
+    </div>
+
+    <a
+        href="{% url 'producto-create' %}"
+        class="rounded-lg bg-blue-600 px-5 py-3 font-semibold text-white shadow hover:bg-blue-700"
+    >
+        + Nuevo producto
+    </a>
+
+</div>
+
+
+<div class="overflow-hidden rounded-xl bg-white shadow">
+
+    {% if productos %}
+
+        <div class="overflow-x-auto">
+
+            <table class="w-full text-left">
+
+                <thead class="bg-slate-50 text-xs uppercase text-slate-500">
+
+                    <tr>
+
+                        <th class="px-6 py-4">
+                            Nombre
+                        </th>
+
+                        <th class="px-6 py-4">
+                            Precio
+                        </th>
+
+                        <th class="px-6 py-4">
+                            Stock
+                        </th>
+
+                        <th class="px-6 py-4 text-right">
+                            Acciones
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody class="divide-y divide-slate-200">
+
+                    {% for producto in productos %}
+
+                        <tr class="hover:bg-slate-50">
+
+                            <td class="px-6 py-4 font-medium text-slate-900">
+                                {{ producto.nombre }}
+                            </td>
+
+                            <td class="px-6 py-4">
+                                ${{ producto.precio }}
+                            </td>
+
+                            <td class="px-6 py-4">
+                                {{ producto.stock }}
+                            </td>
+
+                            <td class="px-6 py-4">
+
+                                <div class="flex justify-end gap-3">
+
+                                    <a
+                                        href="{% url 'producto-detail' producto.pk %}"
+                                        class="font-medium text-blue-600 hover:text-blue-800"
+                                    >
+                                        Ver
+                                    </a>
+
+                                    <a
+                                        href="{% url 'producto-update' producto.pk %}"
+                                        class="font-medium text-amber-600 hover:text-amber-800"
+                                    >
+                                        Editar
+                                    </a>
+
+                                    <a
+                                        href="{% url 'producto-delete' producto.pk %}"
+                                        class="font-medium text-red-600 hover:text-red-800"
+                                    >
+                                        Eliminar
+                                    </a>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    {% else %}
+
+        <div class="p-12 text-center">
+
+            <h2 class="text-xl font-semibold text-slate-700">
+                No existen productos
+            </h2>
+
+            <p class="mt-2 text-slate-500">
+                Comienza registrando tu primer producto.
+            </p>
+
+            <a
+                href="{% url 'producto-create' %}"
+                class="mt-5 inline-block rounded-lg bg-blue-600 px-5 py-3 font-semibold text-white hover:bg-blue-700"
+            >
+                Crear producto
+            </a>
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
